@@ -1,6 +1,0 @@
-A Y
-B X
-C Z
-C Z
-A X
-B Y
