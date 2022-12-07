@@ -1,9 +1,18 @@
-with open("C:/Users/w82619/Projekte/Advent_of_Code/Day7/input.txt") as input:
+with open("C:/Users/Elias/Documents/AdventOfCode/2022/Day7/input.txt") as input:
     lines = [line.strip() for line in input]
-    directories = {}
-    currentDirectories = {}
-    currentDirectory = ""
-    sumDirectory = 0
+    directories = []
+    currentDirectory = None
+
+    class Directory:
+        def __init__(self, name):
+            self.name = name
+            self.parent = None
+            self.size = 0
+            self.children = []
+
+        def __str__(self):
+            return f"({self.name}: {self.size})"
+
     for line in lines:
         line = line.split(" ")
 
@@ -13,38 +22,31 @@ with open("C:/Users/w82619/Projekte/Advent_of_Code/Day7/input.txt") as input:
                 continue
             #new directory
             elif line[1] == "cd" and line[2] != "..":
+                
+                d = Directory(line[2])
                 if currentDirectory:
-                    currentDirectories[currentDirectory] = sumDirectory
-                currentDirectory = line[2]
-                sumDirectory = 0
+                    d.parent = currentDirectory
+                currentDirectory = d
+                directories.append(d)
             else:
                 #del currentDirectories[currentDirectory]
-                currentDirectory
-                print(currentDirectories)
-
-
-        elif line[0] == "dir":
-            continue
-        else:
-            #file
-            fileSize = int(line[0])
-            if fileSize > 100000:
-                #kill current directory
-                currentDirectory = ""
-            else:
-                sumDirectory += fileSize
-                if sumDirectory > 100000:
-                    currentDirectory = ""
-                    continue
-        
-    print(list(currentDirectories)[-10:])
-
-    ########## Klasse, Tuples anschauen ################
+                parent = currentDirectory.parent
+                currentDirectory= directories[directories.index(parent)]
                 
 
 
+        elif line[0] == "dir":
+
+            currentDirectory.children.append(line[1])
+            
+        else:
+            #size
+            currentDirectory.size += int(line[0])
+
 
         
 
+    for i in range(len(directories)):
+        print(directories[i].name, directories[i].size, "parent:", directories[i].parent)
 
-
+    ########## Klasse, Tuples anschauen ################
