@@ -1,4 +1,4 @@
-with open("C:/Users/w82619/Projekte/Advent_of_Code/Day9/input.txt") as input:
+with open("C:/Users/Elias/Documents/AdventOfCode/2022/Day9/input.txt") as input:
     lines = [line.strip() for line in input]
     headMoves = []
     tailPositions = []
@@ -36,8 +36,6 @@ with open("C:/Users/w82619/Projekte/Advent_of_Code/Day9/input.txt") as input:
                 
     
 
-
-
     for line in lines:
         move, anzahl = line.split(" ")
         for i in range(int(anzahl)):
@@ -71,10 +69,3 @@ with open("C:/Users/w82619/Projekte/Advent_of_Code/Day9/input.txt") as input:
     
         #print(tMove, tailPosition)
         # print(headPosition, diff, tMove, tailPosition)
-
-
-
-        
-
-    
-                    
